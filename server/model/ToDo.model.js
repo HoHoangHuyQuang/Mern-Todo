@@ -5,8 +5,6 @@ import mongoose from "mongoose";
 
 const toDoSchema = new mongoose.Schema(
   {
-    _id: Number,
-
     title: {
       type: String,
       required: true,

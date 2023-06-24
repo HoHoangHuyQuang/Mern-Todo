@@ -1,7 +1,7 @@
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import  express from "express";
+import express from "express";
 import ToDo from "./router/ToDo.js";
 
 dotenv.config();
@@ -9,10 +9,15 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+var corsOptions = {
+  origin: ["http://localhost:5000", "http://localhost:3500"],
+};
+
 // Monog connect
 const URI = process.env.MONGO_URI;
 
-app.use(cors());
+// middleware
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "30mb", type: "application/json" }));
 app.use(express.urlencoded({ extended: true, limit: "30mb" }));
 

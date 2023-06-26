@@ -15,7 +15,7 @@ var corsOptions = {
 
 // Monog connect
 const URI = process.env.MONGO_URI;
-
+ 
 // middleware
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "30mb", type: "application/json" }));

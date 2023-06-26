@@ -1,11 +1,11 @@
 import logo from "./logo.svg";
 import "./App.css";
+import TodoList from "./Component/ToDoList";
 
 function App() {
   return (
     <div className="App">
-      return (<div className="main">React Crud Operations</div>
-      );
+     <TodoList  />
     </div>
   );
 }

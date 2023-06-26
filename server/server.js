@@ -9,9 +9,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+var whitelist = ['http://localhost:3000', 'http://localhost:5000']
 var corsOptions = {
-  origin: ["http://localhost:5000", "http://localhost:3500"],
-};
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 // Monog connect
 const URI = process.env.MONGO_URI;

@@ -1,7 +1,15 @@
 import { ToDoModel } from "../model/ToDo.model.js";
 
 export const getTodos = async (req, res) => {
-  const todo = await ToDoModel.find()
+
+  //   /todo || /todo?title=...
+  const title = req.query.title; 
+
+  let condition = title
+    ? { title: { $regex: new RegExp(title), $options: "i" } }
+    : {};
+
+  const todo = await ToDoModel.find(condition)
     .then((data) => {
       if (!data) res.status(204).send({ message: "Content Not found" });
       else res.status(200).send(data);
@@ -23,26 +31,9 @@ export const getTodoById = async (req, res) => {
     });
 };
 
-export const getTodosByTitle = async (req, res) => {
-  // todo?title=...
-  const title = req.query.title;
-  // title not null, regex ignorecase
-  let condition = title
-    ? { title: { $regex: new RegExp(title), $options: "i" } }
-    : {};
-  const todo = await ToDoModel.find(condition)
-    .then((data) => {
-      if (!data)
-        res.status(404).send({ message: "Not found with title " + title });
-      else resres.status(200).send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({ message: "Error retrieving " + `${err}` });
-    });
-};
 
 export const createToDo = async (req, res) => {
-  if (!req.body) {
+  if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
@@ -53,25 +44,20 @@ export const createToDo = async (req, res) => {
   });
   newToDo
     .save(newToDo)
-    .then((data) => res.status(201).send({ message: "create successfully" }))
+    .then(() => res.status(201).send({ message: "create successfully" }))
     .catch((err) => {
       res.status(500).send({ message: "Error retrieving " + `${err}` });
     });
 };
 
 export const updateToDo = async (req, res) => {
-  if (!req.body) {
+  const id = req.params.id;
+  if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
-  }
-  const id = req.params.id;
-  const todo = await ToDoModel.findOneAndUpdate({ _id: id }, req.body, {
-    new: true,
-  })
-    .then((data) => {
-      if (!data) res.status(404).send({ message: "Not found with id: " + id });
-      else res.send(data);
-    })
+  }  
+  const todo = await ToDoModel.findOneAndUpdate({ _id: id }, req.body)
+  .then(() => res.status(201).send({ message: "update successfully" }))
     .catch((err) => {
       res.status(500).send({ message: "Error retrieving " + `${err}` });
     });

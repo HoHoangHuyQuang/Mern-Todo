@@ -1,9 +1,8 @@
 import { ToDoModel } from "../model/ToDo.model.js";
 
 export const getTodos = async (req, res) => {
-
   //   /todo || /todo?title=...
-  const title = req.query.title; 
+  const title = req.query.title;
 
   let condition = title
     ? { title: { $regex: new RegExp(title), $options: "i" } }
@@ -31,7 +30,6 @@ export const getTodoById = async (req, res) => {
     });
 };
 
-
 export const createToDo = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -55,9 +53,12 @@ export const updateToDo = async (req, res) => {
   if (Object.keys(req.body).length === 0) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
-  }  
+  }
   const todo = await ToDoModel.findOneAndUpdate({ _id: id }, req.body)
-  .then(() => res.status(201).send({ message: "update successfully" }))
+    .then((data) => {
+      if (!data) res.status(404).send({ message: "Not found with id: " + id });
+      else res.status(201).send({ message: "update successfully" });
+    })
     .catch((err) => {
       res.status(500).send({ message: "Error retrieving " + `${err}` });
     });

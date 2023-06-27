@@ -40,7 +40,7 @@ mongoose
 
 // routers
 
-app.use("/todo", ToDo);
+app.use("/api/todo", ToDo);
 
 app.get("/", (req, res) => {
   res.send("Hello World!!");

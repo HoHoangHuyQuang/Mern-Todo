@@ -14,9 +14,7 @@ const toDoSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    startTime:{
-      type: timestamps,
-    },
+   
     isCompleted: {
       type: Boolean,
       default: false,

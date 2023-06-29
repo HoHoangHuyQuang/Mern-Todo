@@ -1,18 +1,16 @@
 import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TodoList from "./Component/ToDoList";
-import { getAllToDos } from "./Api";
-import { useEffect } from "react";
 
 function App() {
-
-  useEffect(() => {
-      getAllToDos();
-  }, []);
-
   return (
-    <div className="App">
-     <TodoList  />
-    </div>
+    <main className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<TodoList />} />
+        </Routes>
+      </BrowserRouter>
+    </main>
   );
 }
 

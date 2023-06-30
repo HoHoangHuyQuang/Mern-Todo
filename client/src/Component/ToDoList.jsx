@@ -2,32 +2,32 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { getAllToDos } from "../Api";
-import { ToDoCard } from "./TodoCard";
+import { ToDoCard } from "./ToDoCard";
 
 export function TodoList() {
   const [infoTodo, setInfoTodo] = React.useState([]);
-  
+
   React.useEffect(() => {
-    const fetchData = async () =>{
+    const fetchData = async () => {
       const data = await getAllToDos();
       setInfoTodo(data);
-    }
+    };
     fetchData();
   }, []);
 
   return (
     <React.Fragment>
-      <section className="todo-container" style={{ align: "center" }}>
-        <h2>What will u do today</h2>
-
-        <section className="todo-data">
-          <ul className="todo-list-block">
+      <div className="container">
+        <h2>What will u do today  <button >+ Add</button> </h2>
+        
+        <div className="todo-list">
+          <ul className="todo-item">
             {infoTodo.map((data) => (
               <ToDoCard data={data} />
             ))}
           </ul>
-        </section>
-      </section>
+        </div>
+      </div>
     </React.Fragment>
   );
 }

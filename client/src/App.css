@@ -1,6 +1,55 @@
-main, .App{
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+.App{
+  background: #000;
+  padding: 30px;
+}
+.container{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  color: aliceblue;  
+  flex-direction: column;
+}
+.container> h2{
+  text-align: center; 
+}
+.todo-list{ 
+  border-radius: 4px; 
+  padding: 5px;
+  min-width: 50vw;
+}
+.todo-list> ul{
+  text-decoration: none;
+  list-style: none;
+}
+.todo-content{
+  background: #e8e8e8;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1em;
+}
+.todo-item> li{ 
+  padding-bottom: 1em;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  /* border: none; */
+  color: white;
+  padding: 10px 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }

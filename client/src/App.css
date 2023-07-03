@@ -8,6 +8,19 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
 }
+td, th {
+  border: none;
+  text-align: left;
+  padding: 8px;
+}
+input[type="checkbox"]{
+  width: 2rem;
+  height: 3rem;
+
+}
+.clear{
+  clear: both;
+}
 
 .App{
   background: #000;
@@ -35,7 +48,8 @@ body {
 .todo-content{
   background: #e8e8e8;
   color: #000;
-  display: flex;
+  display: flex;  
+  flex-direction: row;
   justify-content: space-between;
   padding: 0 1em;
 }
@@ -43,13 +57,34 @@ body {
   padding-bottom: 1em;
 }
 
-button {
-  background-color: #4CAF50; /* Green */
-  /* border: none; */
+.create-button {
+  background-color: #4CAF50; /* Green */  
   color: white;
   padding: 10px 7px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.delete-button {
+  background-color: #ff0000; /* Red */  
+  color: white;
+  padding: 7px 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 0.5em;
+}
+
+.edit-button {
+  background-color: #3333cc; /* blue */  
+  color: white;
+  padding: 7px 7px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin-top: 0.5em;
 }

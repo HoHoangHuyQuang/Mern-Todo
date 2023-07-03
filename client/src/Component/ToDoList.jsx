@@ -3,27 +3,46 @@ import { Link } from "react-router-dom";
 
 import { getAllToDos } from "../Api";
 import { ToDoCard } from "./ToDoCard";
+import axios from "axios";
 
 export function TodoList() {
-  const [infoTodo, setInfoTodo] = React.useState([]);
+  const [todo, setTodo] = React.useState([]);
 
   React.useEffect(() => {
     const fetchData = async () => {
       const data = await getAllToDos();
-      setInfoTodo(data);
+      setTodo(data);
     };
     fetchData();
   }, []);
 
+  function handleDeleteClick(todoId) {
+    axios.delete(`http://localhost:5000/api/todo/${todoId}`);
+    setTodo((data) => {
+      return data.filter((todo) => todo.id !== todoId);
+    });
+  }
+  function handleChecked(todoId) {
+    axios.put(`http://localhost:5000/api/todo/${todoId}/done`);
+    setTodo((data) => {
+      return data.filter((todo) => todo.id !== todoId);
+    });
+  }
+
   return (
     <React.Fragment>
       <div className="container">
-        <h2>What will u do today  <button >+ Add</button> </h2>
-        
+        <h2>
+          What will u do today
+          <Link to="/create-todo" className="button-new">
+            <button className="create-button">+ Add</button>
+          </Link>
+        </h2>
+
         <div className="todo-list">
           <ul className="todo-item">
-            {infoTodo.map((data) => (
-              <ToDoCard data={data} />
+            {todo.map((data) => (
+              <ToDoCard data={data} handleChecked={handleChecked}  handleDelete={handleDeleteClick}/>
             ))}
           </ul>
         </div>

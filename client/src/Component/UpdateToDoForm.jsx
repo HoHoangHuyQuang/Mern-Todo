@@ -1,6 +1,6 @@
 import React from "react";
 
-export const CreateToDo=()=>{
+export const UpdateToDo=()=>{
     const [data, setData] = React.useState({ title: "", text: "" });
 
     function handleChange(e) {

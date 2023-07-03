@@ -51,11 +51,27 @@ export const updateToDo = async (req, res) => {
   }
   const id = req.params.id;
   try {
+    
     await ToDoService.updateToDo(
       id,
       req.body.title,
       req.body.text,
       req.body.isCompleted
+    ).then(res.status(201).send({ message: "update successfully" }));
+  } catch (error) {
+    res.status(500).send({ message: "Error retrieving " + `${error}` });
+  }
+};
+
+export const markDoneToDo = async (req, res) => { 
+  const id = req.params.id;
+  try {
+    const data = await ToDoService.getToDoById(id);
+    await ToDoService.updateToDo(
+      id,
+      data.title,
+      data.text,
+      true
     ).then(res.status(201).send({ message: "update successfully" }));
   } catch (error) {
     res.status(500).send({ message: "Error retrieving " + `${error}` });

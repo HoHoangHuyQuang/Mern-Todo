@@ -5,7 +5,7 @@ import { getAllToDos } from "../Api";
 import { ToDoCard } from "./ToDoCard";
 import axios from "axios";
 
-export function TodoList() {
+function TodoList() {
   const [todo, setTodo] = React.useState([]);
 
   React.useEffect(() => {
@@ -34,7 +34,7 @@ export function TodoList() {
       <div className="container">
         <h2>
           What will u do today
-          <Link to="/create-todo" className="button-new">
+          <Link to="/create" className="button-new">
             <button className="create-button">+ Add</button>
           </Link>
         </h2>
